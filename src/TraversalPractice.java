@@ -124,9 +124,7 @@ public class TraversalPractice {
     }
 
     public static int size(TreeNode node, int currentSize) {
-        if (node == null) {
-            return currentSize;
-        }
+        if (node == null) return currentSize;
         currentSize = size(node.left, currentSize);
         currentSize = size(node.right, currentSize);
         currentSize += 1;
@@ -157,9 +155,18 @@ public class TraversalPractice {
      * @return the count of branch nodes in the tree
      */
     public static int branchCount(TreeNode node) {
-        return -1;
+        return branchCount(node, 0);
     }
 
+    public static int branchCount(TreeNode node, int currentCount) {
+        if (node == null) return currentCount;
+        if (node.left == null && node.right == null) return currentCount;
+
+        currentCount = branchCount(node.left, currentCount);
+        currentCount = branchCount(node.right, currentCount);
+        currentCount += 1;
+        return currentCount;
+    }
 
     /**
      * Returns the maximum value in the tree.
